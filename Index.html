@@ -1,0 +1,1278 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Grace Nganga - Data Analyst specializing in SQL, Python, Power BI, and Excel. Transforming data into actionable insights." />
+    <meta name="keywords" content="Data Analyst, SQL, Python, Power BI, Excel, Data Visualization, Business Intelligence, Grace Nganga" />
+    <meta name="author" content="Grace Nganga" />
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Grace Nganga | Data Analyst Portfolio" />
+    <meta property="og:description" content="Data Analyst specializing in SQL, Python, Power BI. Transforming data into actionable insights." />
+    <meta property="og:image" content="images/about/1.jpg" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Grace Nganga | Data Analyst Portfolio" />
+    <meta name="twitter:description" content="Data Analyst specializing in SQL, Python, Power BI" />
+    
+    <title>Grace Nganga | Data Analyst Portfolio</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+      :root {
+        --primary: #6366f1;
+        --secondary: #ec4899;
+        --accent: #14b8a6;
+        --dark: #0f172a;
+        --light: #f8fafc;
+        --purple-glow: rgba(99, 102, 241, 0.4);
+        --pink-glow: rgba(236, 72, 153, 0.4);
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      html {
+        scroll-behavior: smooth;
+      }
+      
+      body {
+        font-family: 'Inter', sans-serif;
+        color: #1e293b;
+        overflow-x: hidden;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        position: relative;
+      }
+      
+      /* Animated Background Particles */
+      .particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+      
+      .particle {
+        position: absolute;
+        border-radius: 50%;
+        animation: float-particles 20s infinite;
+        opacity: 0.6;
+      }
+      
+      @keyframes float-particles {
+        0%, 100% {
+          transform: translateY(0) translateX(0) scale(1);
+          opacity: 0.6;
+        }
+        25% {
+          transform: translateY(-100px) translateX(50px) scale(1.2);
+          opacity: 0.8;
+        }
+        50% {
+          transform: translateY(-50px) translateX(-50px) scale(0.8);
+          opacity: 0.4;
+        }
+        75% {
+          transform: translateY(-150px) translateX(100px) scale(1.1);
+          opacity: 0.7;
+        }
+      }
+      
+      h1, h2, h3, .display-3 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+      }
+      
+      /* Glassmorphism Navbar */
+      .navbar {
+        backdrop-filter: blur(20px) saturate(180%);
+        background: rgba(15, 23, 42, 0.8) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .navbar-scrolled {
+        background: rgba(15, 23, 42, 0.95) !important;
+        box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
+      }
+      
+      .navbar-brand {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: 1.5rem;
+        background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        position: relative;
+        transition: all 0.3s ease;
+      }
+      
+      .navbar-brand::before {
+        content: '';
+        position: absolute;
+        top: -5px;
+        left: -10px;
+        right: -10px;
+        bottom: -5px;
+        background: linear-gradient(135deg, #6366f1, #ec4899);
+        border-radius: 8px;
+        opacity: 0;
+        filter: blur(20px);
+        transition: opacity 0.3s ease;
+        z-index: -1;
+      }
+      
+      .navbar-brand:hover::before {
+        opacity: 0.5;
+      }
+      
+      .nav-link {
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.8) !important;
+        margin: 0 0.5rem;
+        position: relative;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 0.5rem 1rem !important;
+      }
+      
+      .nav-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(236, 72, 153, 0.2));
+        border-radius: 8px;
+        opacity: 0;
+        transform: scale(0.8);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .nav-link:hover::before {
+        opacity: 1;
+        transform: scale(1);
+      }
+      
+      .nav-link:hover {
+        color: #fff !important;
+        transform: translateY(-2px);
+      }
+      
+      /* Hero/About Section with Glassmorphism */
+      #about {
+        background: transparent;
+        position: relative;
+        overflow: hidden;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding-top: 100px !important;
+      }
+      
+      .glass-container {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 3rem;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        position: relative;
+        z-index: 1;
+      }
+      
+      /* Animated gradient text */
+      .gradient-text {
+        background: linear-gradient(135deg, #6366f1 0%, #ec4899 50%, #14b8a6 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradient-shift 3s ease infinite;
+        display: inline-block;
+      }
+      
+      @keyframes gradient-shift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+      }
+      
+      /* Profile Image with Multiple Animations */
+      .profile-container {
+        position: relative;
+        display: inline-block;
+      }
+      
+      .profile-image {
+        border-radius: 30px;
+        border: 4px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 
+          0 0 60px rgba(99, 102, 241, 0.4),
+          0 0 120px rgba(236, 72, 153, 0.3),
+          inset 0 0 30px rgba(255, 255, 255, 0.1);
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        z-index: 2;
+        animation: float-image 6s ease-in-out infinite;
+      }
+      
+      @keyframes float-image {
+        0%, 100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(2deg);
+        }
+      }
+      
+      .profile-image:hover {
+        transform: scale(1.05) rotate(-2deg) !important;
+        box-shadow: 
+          0 0 80px rgba(99, 102, 241, 0.6),
+          0 0 160px rgba(236, 72, 153, 0.4),
+          inset 0 0 50px rgba(255, 255, 255, 0.2);
+      }
+      
+      /* Orbiting rings around profile */
+      .profile-container::before,
+      .profile-container::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 2px solid;
+        border-radius: 50%;
+        opacity: 0.3;
+        animation: orbit 10s linear infinite;
+      }
+      
+      .profile-container::before {
+        width: 120%;
+        height: 120%;
+        border-color: #6366f1;
+        animation-duration: 8s;
+      }
+      
+      .profile-container::after {
+        width: 140%;
+        height: 140%;
+        border-color: #ec4899;
+        animation-duration: 12s;
+        animation-direction: reverse;
+      }
+      
+      @keyframes orbit {
+        from { transform: translate(-50%, -50%) rotate(0deg); }
+        to { transform: translate(-50%, -50%) rotate(360deg); }
+      }
+      
+      /* Bounce animation for scroll indicator */
+      @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-10px);
+        }
+        60% {
+          transform: translateY(-5px);
+        }
+      }
+      
+      /* Float animation for hero orbs */
+      @keyframes float-orb {
+        0%, 100% {
+          transform: translate(0, 0) scale(1);
+        }
+        33% {
+          transform: translate(30px, -30px) scale(1.1);
+        }
+        66% {
+          transform: translate(-30px, 30px) scale(0.9);
+        }
+      }
+      
+      /* Button hover effects */
+      .btn:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6) !important;
+      }
+      
+      .btn:active {
+        transform: translateY(-1px) scale(1.02);
+      }
+      
+      /* Text with glow effect */
+      .lead, .text-light {
+        color: rgba(255, 255, 255, 0.9) !important;
+        line-height: 1.8;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      }
+      
+      /* Projects Section */
+      #projects {
+        background: linear-gradient(180deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      /* Card with magnetic effect */
+      .project-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        overflow: hidden;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        transform-style: preserve-3d;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+      
+      .project-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        z-index: 0;
+      }
+      
+      .project-card:hover::before {
+        opacity: 1;
+      }
+      
+      .project-card:hover {
+        transform: translateY(-20px) scale(1.02);
+        box-shadow: 
+          0 30px 90px rgba(99, 102, 241, 0.4),
+          0 0 60px rgba(236, 72, 153, 0.3);
+        border-color: rgba(99, 102, 241, 0.5);
+      }
+      
+      .card-img-top {
+        transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        filter: brightness(0.8);
+      }
+      
+      .project-card:hover .card-img-top {
+        transform: scale(1.15);
+        filter: brightness(1) saturate(1.2);
+      }
+      
+      .card-body {
+        position: relative;
+        z-index: 1;
+        background: rgba(15, 23, 42, 0.8);
+        backdrop-filter: blur(10px);
+      }
+      
+      .card-body h3 {
+        color: #fff;
+        margin-bottom: 1rem;
+      }
+      
+      .card-body p {
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.7;
+      }
+      
+      .card-body a {
+        color: #6366f1;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        position: relative;
+        padding: 2px 0;
+      }
+      
+      .card-body a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #6366f1, #ec4899);
+        transition: width 0.3s ease;
+      }
+      
+      .card-body a:hover {
+        color: #ec4899;
+      }
+      
+      .card-body a:hover::after {
+        width: 100%;
+      }
+      
+      /* Skills Section */
+      #skills {
+        background: #0f172a;
+        position: relative;
+      }
+      
+      .skill-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 2.5rem 1.5rem;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .skill-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(99, 102, 241, 0.2), transparent 70%);
+        transform: scale(0);
+        transition: transform 0.6s ease;
+      }
+      
+      .skill-card:hover::before {
+        transform: scale(1);
+      }
+      
+      .skill-card:hover {
+        transform: translateY(-15px) scale(1.05);
+        border-color: rgba(99, 102, 241, 0.5);
+        box-shadow: 
+          0 25px 70px rgba(99, 102, 241, 0.4),
+          0 0 40px rgba(236, 72, 153, 0.2);
+      }
+      
+      .skill-card img {
+        transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        filter: drop-shadow(0 10px 20px rgba(99, 102, 241, 0.3));
+        position: relative;
+        z-index: 1;
+      }
+      
+      .skill-card:hover img {
+        transform: scale(1.2) rotate(360deg);
+        filter: drop-shadow(0 15px 40px rgba(99, 102, 241, 0.6));
+      }
+      
+      .skill-card h3 {
+        color: #fff;
+        margin-top: 1.5rem;
+        position: relative;
+        z-index: 1;
+      }
+      
+      .skill-card p {
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.8;
+        position: relative;
+        z-index: 1;
+      }
+      
+      .skill-card a {
+        color: #6366f1;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 1;
+        display: inline-block;
+      }
+      
+      .skill-card a:hover {
+        color: #ec4899;
+        transform: translateX(10px);
+      }
+      
+      /* Contact Section */
+      #contact {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .contact-item {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 1.5rem 2rem;
+        transition: all 0.3s ease;
+      }
+      
+      .contact-item:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(99, 102, 241, 0.3);
+      }
+      
+      .contact-icon {
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(236, 72, 153, 0.3));
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        position: relative;
+      }
+      
+      .contact-icon::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+        background: inherit;
+        border-radius: 50%;
+        filter: blur(15px);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+      
+      .contact-item:hover .contact-icon {
+        transform: scale(1.15) rotate(360deg);
+      }
+      
+      .contact-item:hover .contact-icon::before {
+        opacity: 1;
+      }
+      
+      .social-link {
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        display: inline-block;
+      }
+      
+      .social-link:hover {
+        transform: translateY(-15px) scale(1.1);
+      }
+      
+      .social-circle {
+        background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .social-circle::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transform: rotate(45deg);
+        transition: all 0.6s ease;
+      }
+      
+      .social-link:hover .social-circle {
+        box-shadow: 
+          0 25px 50px rgba(99, 102, 241, 0.5),
+          0 0 40px rgba(236, 72, 153, 0.5);
+      }
+      
+      .social-link:hover .social-circle::before {
+        left: 100%;
+      }
+      
+      /* Scroll reveal animations */
+      .reveal {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      /* Cursor trail effect */
+      .cursor-dot {
+        width: 8px;
+        height: 8px;
+        background: linear-gradient(135deg, #6366f1, #ec4899);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.2s ease;
+        box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+      }
+      
+      /* Responsive */
+      @media (max-width: 768px) {
+        .display-3 {
+          font-size: 2.5rem !important;
+        }
+        
+        .glass-container {
+          padding: 2rem 1.5rem;
+        }
+        
+        .profile-container::before,
+        .profile-container::after {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Animated particles background -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- NAVBAR START -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar">
+      <div class="container">
+        <a class="navbar-brand" href="#home">Grace Nganga</a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation" style="color: rgba(255,255,255,0.8);">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#projects">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#skills">Skills</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- NAVBAR END -->
+
+    <main style="padding-top: 0;">
+      <div id="home"></div>
+      
+      <!-- Hero Section START -->
+      <section class="position-relative overflow-hidden" style="min-height: 100vh; display: flex; align-items: center; background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); padding-top: 100px;">
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
+            <!-- Profile Image Column -->
+            <div class="col-lg-5 col-md-6 mb-5 mb-lg-0 text-center reveal">
+              <div class="profile-container d-inline-block">
+                <img
+                  src="images/about/1.jpg"
+                  alt="Grace Nganga"
+                  class="img-fluid profile-image"
+                  style="max-width: 400px; width: 100%; aspect-ratio: 1 / 1; object-fit: cover;"
+                />
+              </div>
+            </div>
+            
+            <!-- Text Content Column -->
+            <div class="col-lg-7 col-md-6 text-center text-lg-start">
+              <!-- Main Heading -->
+              <div class="reveal">
+                <h1 class="display-1 fw-bold mb-4" style="font-size: clamp(2.5rem, 8vw, 5rem);">
+                  <span class="gradient-text">Grace Nganga</span>
+                </h1>
+                <h2 class="display-5 fw-semibold mb-4" style="color: rgba(255, 255, 255, 0.9); font-size: clamp(1.5rem, 4vw, 2.5rem);">
+                  Data Analyst & Insights Specialist
+                </h2>
+              </div>
+              
+              <!-- Subtitle -->
+              <div class="reveal" style="transition-delay: 0.2s;">
+                <p class="lead mb-5" style="color: rgba(255, 255, 255, 0.7); font-size: clamp(1rem, 2vw, 1.25rem);">
+                  Transforming raw data into actionable insights through SQL, Python, and Power BI. 
+                  Building dashboards that drive business decisions.
+                </p>
+              </div>
+              
+              <!-- CTA Buttons -->
+              <div class="reveal d-flex gap-3 justify-content-center justify-content-lg-start flex-wrap mb-5" style="transition-delay: 0.4s;">
+                <a href="#projects" class="btn btn-lg px-5 py-3 rounded-pill fw-semibold" 
+                   style="background: linear-gradient(135deg, #6366f1, #ec4899); 
+                          color: white; 
+                          border: none; 
+                          box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+                          transition: all 0.3s ease;">
+                  View Projects
+                </a>
+                <button type="button" onclick="window.open('https://wa.me/254769589467', '_blank')" class="btn btn-lg px-5 py-3 rounded-pill fw-semibold" 
+                   style="background: rgba(255, 255, 255, 0.05); 
+                          color: white; 
+                          border: 2px solid rgba(255, 255, 255, 0.2);
+                          backdrop-filter: blur(10px);
+                          transition: all 0.3s ease;
+                          cursor: pointer;">
+                  Get in Touch
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Stats/Highlights -->
+          <div class="row g-4 mt-5 reveal" style="transition-delay: 0.6s;">
+                <div class="col-6 col-md-3">
+                  <div class="p-4" style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                    <div class="h2 fw-bold mb-2 gradient-text">SQL</div>
+                    <div class="text-white-50">Database Expert</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="p-4" style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                    <div class="h2 fw-bold mb-2 gradient-text">Python</div>
+                    <div class="text-white-50">Data Analysis</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="p-4" style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                    <div class="h2 fw-bold mb-2 gradient-text">Power BI</div>
+                    <div class="text-white-50">Visualization</div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div class="p-4" style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                    <div class="h2 fw-bold mb-2 gradient-text">Excel</div>
+                    <div class="text-white-50">Analytics</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+          <!-- Scroll Indicator -->
+          <div class="row">
+            <div class="col-12 text-center">
+              <div class="reveal mt-5 pt-5" style="transition-delay: 0.8s;">
+                <a href="#about" class="text-decoration-none">
+                  <div class="d-inline-flex flex-column align-items-center" style="color: rgba(255, 255, 255, 0.5); animation: bounce 2s infinite;">
+                    <span class="mb-2" style="font-size: 0.875rem;">Scroll Down</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Animated gradient orbs in background -->
+        <div style="position: absolute; top: 10%; left: 10%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(99, 102, 241, 0.3), transparent); border-radius: 50%; filter: blur(80px); animation: float-orb 20s infinite;"></div>
+        <div style="position: absolute; bottom: 10%; right: 10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(236, 72, 153, 0.3), transparent); border-radius: 50%; filter: blur(80px); animation: float-orb 25s infinite reverse;"></div>
+      </section>
+      <!-- Hero Section END -->
+      
+      <!-- About Section START -->
+      <section id="about" class="py-5 py-lg-6">
+        <div class="container">
+          <!-- Title -->
+          <div class="row">
+            <div class="col-12 text-center reveal">
+              <h1 class="display-3 fw-bold mb-5 gradient-text">About Me</h1>
+            </div>
+          </div>
+
+          <!-- Text -->
+          <div class="row justify-content-center reveal">
+            <div class="col-11 col-md-10 col-lg-8">
+              <div class="glass-container">
+                <p class="lead text-center text-light mb-4">
+                I’m a data analyst who turns messy data into clear, actionable insights.
+          I work end-to-end—from collecting and cleaning data with SQL and Python,
+          to building intuitive dashboards in Power BI and Excel that tell a story
+          and drive decisions. I enjoy partnering with stakeholders, defining the
+          right metrics, and validating results so recommendations are
+          trustworthy and practical.
+                </p>
+                <p class="text-center fs-5 text-light mb-0">
+                I’m currently exploring how AI can elevate analytics—using LLMs to
+          speed up data exploration, automate documentation, and prototype
+          predictive workflows that plug into my SQL/Python stack. When I’m not
+          working, I like solving logic puzzles, cycling, and learning through
+          data-driven side projects. I’m always open to new challenges and
+          collaborations—let’s build something insightful.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- About Section END -->
+    </main>
+
+    <!-- Projects Section START (place right after the About section) -->
+<section id="projects" class="py-5 py-lg-6">
+  <div class="container">
+    <!-- Title -->
+    <div class="row">
+      <div class="col-12 text-center reveal">
+        <h1 class="display-3 fw-bold mb-5 gradient-text">Projects</h1>
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="row g-4 g-lg-5 justify-content-center">
+
+      <!-- Project 1 -->
+      <div class="col-12 col-md-6 col-lg-4 d-flex reveal">
+        <div class="card project-card text-center w-100">
+          <img src="images/projects/1.jpg" class="card-img-top rounded-top-4"
+               alt="Preview for Project 1"
+               style="height: 260px; object-fit: cover;">
+          <div class="card-body">
+            <h3 class="h4 fw-bold mb-2">Project 1</h3>
+            <p class="mb-3">
+              I analyze messy datasets with <strong>SQL</strong> and <strong>Python</strong> and turn them
+              into clear KPIs and visuals. This project showcases data cleaning, feature engineering,
+              and an executive-ready dashboard built in <strong>Power BI</strong> and <strong>Excel</strong>.
+            </p>
+            <div class="fw-bold">
+              <a href="#" class="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">Blog Post</a>
+              |
+              <a href="#" class="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">Source Code</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="col-12 col-md-6 col-lg-4 d-flex reveal">
+        <div class="card project-card text-center w-100">
+          <img src="images/projects/2.jpg" class="card-img-top rounded-top-4"
+               alt="Preview for Project 2"
+               style="height: 260px; object-fit: cover;">
+          <div class="card-body">
+            <h3 class="h4 fw-bold mb-2">Project 2</h3>
+            <p class="mb-3">
+              A forecasting workflow that blends classic analytics with <strong>AI-assisted</strong> prompts.
+              I use LLMs to speed up exploration and documentation, then validate results with
+              statistical checks and backtests before publishing a Power BI report.
+            </p>
+            <div class="fw-bold">
+              <a href="#" class="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">Blog Post</a>
+              |
+              <a href="#" class="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">Source Code</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="col-12 col-md-6 col-lg-4 d-flex reveal">
+        <div class="card project-card text-center w-100">
+          <img src="images/projects/4.jpg" class="card-img-top rounded-top-4"
+               alt="Preview for Project 3"
+               style="height: 260px; object-fit: cover;">
+          <div class="card-body">
+            <h3 class="h4 fw-bold mb-2">Project 3</h3>
+            <p class="mb-3">
+              End-to-end analytics: ingestion with SQL, transformation in Python, and a
+              stakeholder-friendly dashboard. Focused on clarity, metric definitions, and
+              decision-ready insights for business users.
+            </p>
+            <div class="fw-bold">
+              <a href="#" class="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">Blog Post</a>
+              |
+              <a href="#" class="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">Source Code</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- Projects Section END -->
+
+<!-- Skills Section START (place right after the Projects section) -->
+<section id="skills" class="py-5 py-lg-6">
+  <div class="container">
+    <!-- Title -->
+    <div class="row">
+      <div class="col-12 text-center reveal">
+        <h1 class="display-3 fw-bold mb-5 gradient-text">Skills</h1>
+      </div>
+    </div>
+
+    <!-- 4-up grid -->
+    <div class="row g-4 g-lg-5 text-center justify-content-center">
+
+      <!-- Python -->
+      <div class="col-12 col-md-6 col-lg-3 skill-card reveal">
+        <img src="images/skills/1.png" alt="Python icon"
+             class="img-fluid mb-3" style="max-width: 140px;">
+        <h3 class="h3 fw-bold">Python</h3>
+        <p class="mb-3">
+          Data wrangling, feature engineering, and analysis using
+          <strong>Pandas</strong>, <strong>NumPy</strong>, and <strong>scikit-learn</strong>.
+          I script reusable workflows for automation and exploratory analysis.
+        </p>
+        <a href="#" class="fw-bold link-primary link-underline-opacity-0 link-underline-opacity-100-hover">
+          Link to course or bootcamp
+        </a>
+      </div>
+
+      <!-- Data Visualization -->
+      <div class="col-12 col-md-6 col-lg-3 skill-card reveal">
+        <img src="images/skills/2.png" alt="Data visualization icon"
+             class="img-fluid mb-3" style="max-width: 140px;">
+        <h3 class="h3 fw-bold">Data Visualization</h3>
+        <p class="mb-3">
+          Build clear dashboards and charts in <strong>Power BI</strong> and Python that surface
+          trends and KPIs. I focus on readability, context, and stakeholder-first design.
+        </p>
+        <a href="#" class="fw-bold link-primary link-underline-opacity-0 link-underline-opacity-100-hover">
+          Link to course or bootcamp
+        </a>
+      </div>
+
+      <!-- SQL -->
+      <div class="col-12 col-md-6 col-lg-3 skill-card reveal">
+        <img src="images/skills/3.png" alt="SQL database icon"
+             class="img-fluid mb-3" style="max-width: 140px;">
+        <h3 class="h3 fw-bold">SQL</h3>
+        <p class="mb-3">
+          Write efficient queries for cleaning, joining, and aggregating data.
+          I build reliable datasets that power BI reports and analytics models.
+        </p>
+        <a href="#" class="fw-bold link-primary link-underline-opacity-0 link-underline-opacity-100-hover">
+          Link to course or bootcamp
+        </a>
+      </div>
+
+      <!-- QuickBooks (4th skill) -->
+      <div class="col-12 col-md-6 col-lg-3 skill-card reveal">
+        <img src="images/skills/4.png" alt="QuickBooks accounting icon"
+             class="img-fluid mb-3" style="max-width: 140px;">
+        <h3 class="h3 fw-bold">QuickBooks</h3>
+        <p class="mb-3">
+          Connect and reconcile financial data, map charts of accounts, and export
+          clean datasets for analysis. Turn bookkeeping activity into decision-ready
+          reports and dashboards.
+        </p>
+        <a href="#" class="fw-bold link-primary link-underline-opacity-0 link-underline-opacity-100-hover">
+          Link to course or bootcamp
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- Skills Section END -->
+
+<!-- Contact Section START (place right after the Skills section) -->
+<section id="contact" class="bg-dark text-white py-5 py-lg-6">
+  <div class="container">
+
+    <!-- Title -->
+    <div class="row">
+      <div class="col-12 text-center reveal">
+        <h1 class="display-3 fw-bold mb-5 gradient-text">Contact Me</h1>
+      </div>
+    </div>
+
+    <!-- Email + Phone row -->
+    <div class="row justify-content-center mb-5 g-4">
+      <!-- Email -->
+      <div class="col-12 col-md-auto reveal">
+        <div class="contact-item d-flex align-items-center justify-content-center">
+        <span class="d-inline-flex align-items-center justify-content-center me-3 contact-icon"
+              style="width:56px;height:56px;border-radius:50%;">
+          <!-- envelope icon (inline SVG) -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16" class="text-white">
+            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v.217L8 8.583.002 4.217V4z"/>
+            <path d="M0 5.383v6.234L5.803 8.4.003 5.383zM6.761 8.83l-6.6 3.783A2 2 0 0 0 2 14h12a2 2 0 0 0 1.84-1.215l-6.6-3.955L8 9.417l-1.239-.586zM10.197 8.4 16 11.617V5.383L10.197 8.4z"/>
+          </svg>
+        </span>
+          <span class="fs-4 fw-semibold">gracenganga0742@gmail.com</span>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="col-12 col-md-auto reveal">
+        <div class="contact-item d-flex align-items-center justify-content-center">
+        <span class="d-inline-flex align-items-center justify-content-center me-3 contact-icon"
+              style="width:56px;height:56px;border-radius:50%;">
+          <!-- phone icon (inline SVG) -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16" class="text-white">
+            <path d="M3.654 1.328a.678.678 0 0 1 1.015-.063L6.29 2.88c.329.329.445.81.287 1.237l-.547 1.497a.678.678 0 0 0 .163.7l2.823 2.823a.678.678 0 0 0 .7.163l1.497-.547a1.2 1.2 0 0 1 1.237.287l1.615 1.622a.678.678 0 0 1-.063 1.015l-1.09.872c-.637.51-1.522.6-2.25.22a16.59 16.59 0 0 1-6.55-6.55c-.38-.728-.29-1.613.22-2.25l.9-1.12z"/>
+          </svg>
+        </span>
+          <span class="fs-4 fw-semibold">0113186242</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social icons (LinkedIn, GitHub, Medium) -->
+    <div class="row text-center g-4 justify-content-center">
+      <!-- LinkedIn -->
+      <div class="col-6 col-md-4 col-lg-3 reveal">
+        <a href="https://www.linkedin.com/in/grace-nganga-359063379" class="text-decoration-none text-white social-link" target="_blank">
+          <span class="d-flex align-items-center justify-content-center mx-auto mb-3 social-circle"
+                style="width:110px;height:110px;border-radius:50%;">
+            <img src="icons/linkedin.png" alt="LinkedIn" class="img-fluid" style="max-width:56px;">
+          </span>
+          <div class="fs-4 fw-semibold">LinkedIn</div>
+        </a>
+      </div>
+
+      <!-- GitHub -->
+      <div class="col-6 col-md-4 col-lg-3 reveal">
+        <a href="https://github.com/graceupongrace16069-arch" class="text-decoration-none text-white social-link" target="_blank">
+          <span class="d-flex align-items-center justify-content-center mx-auto mb-3 social-circle"
+                style="width:110px;height:110px;border-radius:50%;">
+            <img src="icons/github.png" alt="GitHub" class="img-fluid" style="max-width:56px;">
+          </span>
+          <div class="fs-4 fw-semibold">GitHub</div>
+        </a>
+      </div>
+
+      <!-- Medium -->
+      <div class="col-6 col-md-4 col-lg-3 reveal">
+        <a href="#" class="text-decoration-none text-white social-link">
+          <span class="d-flex align-items-center justify-content-center mx-auto mb-3 social-circle"
+                style="width:110px;height:110px;border-radius:50%;">
+            <img src="icons/medium.png" alt="Medium" class="img-fluid" style="max-width:56px;">
+          </span>
+          <div class="fs-4 fw-semibold">Medium</div>
+        </a>
+      </div>
+      
+      <!-- WhatsApp -->
+      <div class="col-6 col-md-4 col-lg-3 reveal">
+        <a href="https://wa.me/254769589467" class="text-decoration-none text-white social-link" target="_blank">
+          <span class="d-flex align-items-center justify-content-center mx-auto mb-3 social-circle"
+                style="width:110px;height:110px;border-radius:50%;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="currentColor" viewBox="0 0 16 16" class="text-white">
+              <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+            </svg>
+          </span>
+          <div class="fs-4 fw-semibold">WhatsApp</div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- Contact Section END -->
+
+  </main>
+
+    <!-- Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    
+    <script>
+      // Animated Particles Background
+      function createParticles() {
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 30;
+        
+        for (let i = 0; i < particleCount; i++) {
+          const particle = document.createElement('div');
+          particle.classList.add('particle');
+          
+          const size = Math.random() * 100 + 50;
+          const x = Math.random() * 100;
+          const y = Math.random() * 100;
+          const delay = Math.random() * 20;
+          const duration = Math.random() * 10 + 15;
+          
+          const colors = [
+            'rgba(99, 102, 241, 0.1)',
+            'rgba(236, 72, 153, 0.1)',
+            'rgba(20, 184, 166, 0.1)'
+          ];
+          
+          particle.style.width = size + 'px';
+          particle.style.height = size + 'px';
+          particle.style.left = x + '%';
+          particle.style.top = y + '%';
+          particle.style.background = `radial-gradient(circle, ${colors[Math.floor(Math.random() * colors.length)]}, transparent)`;
+          particle.style.animationDelay = delay + 's';
+          particle.style.animationDuration = duration + 's';
+          
+          particlesContainer.appendChild(particle);
+        }
+      }
+      
+      createParticles();
+      
+      // Scroll Reveal Animation
+      const revealElements = document.querySelectorAll('.reveal');
+      
+      const revealOnScroll = () => {
+        const windowHeight = window.innerHeight;
+        
+        revealElements.forEach(element => {
+          const elementTop = element.getBoundingClientRect().top;
+          const revealPoint = 100;
+          
+          if (elementTop < windowHeight - revealPoint) {
+            element.classList.add('active');
+          }
+        });
+      };
+      
+      window.addEventListener('scroll', revealOnScroll);
+      window.addEventListener('load', revealOnScroll);
+      
+      // Navbar Scroll Effect
+      const navbar = document.getElementById('mainNavbar');
+      
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add('navbar-scrolled');
+        } else {
+          navbar.classList.remove('navbar-scrolled');
+        }
+      });
+      
+      // Custom Cursor Trail (Desktop only)
+      if (window.innerWidth > 768) {
+        const cursorDots = [];
+        const dotCount = 5;
+        
+        for (let i = 0; i < dotCount; i++) {
+          const dot = document.createElement('div');
+          dot.classList.add('cursor-dot');
+          dot.style.opacity = (1 - i * 0.2).toString();
+          dot.style.transform = `scale(${1 - i * 0.15})`;
+          document.body.appendChild(dot);
+          cursorDots.push({ element: dot, x: 0, y: 0 });
+        }
+        
+        let mouseX = 0;
+        let mouseY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+        });
+        
+        function animateCursor() {
+          let x = mouseX;
+          let y = mouseY;
+          
+          cursorDots.forEach((dot, index) => {
+            dot.x += (x - dot.x) * (0.3 - index * 0.05);
+            dot.y += (y - dot.y) * (0.3 - index * 0.05);
+            
+            dot.element.style.left = dot.x + 'px';
+            dot.element.style.top = dot.y + 'px';
+            
+            x = dot.x;
+            y = dot.y;
+          });
+          
+          requestAnimationFrame(animateCursor);
+        }
+        
+        animateCursor();
+      }
+      
+      // Magnetic Effect for Cards (subtle on desktop)
+      if (window.innerWidth > 768) {
+        const cards = document.querySelectorAll('.project-card, .skill-card');
+        
+        cards.forEach(card => {
+          card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-20px) scale(1.02)`;
+          });
+          
+          card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+          });
+        });
+      }
+      
+      // Ensure WhatsApp button works - must run after page loads
+      document.addEventListener('DOMContentLoaded', function() {
+        // WhatsApp button now uses inline onclick, this code is backup
+      });
+      
+      // Smooth Scroll for Navigation Links (only for internal anchors)
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          const href = this.getAttribute('href');
+          if (href && href.startsWith('#')) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+              target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }
+          }
+        });
+      });
+      
+      // Parallax Effect on Scroll
+      window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.profile-image, .glass-container');
+        
+        parallaxElements.forEach(element => {
+          const speed = 0.5;
+          const yPos = -(scrolled * speed);
+          element.style.transform = `translateY(${yPos}px)`;
+        });
+      });
+      
+      // Add animation delay to skill cards
+      const skillCards = document.querySelectorAll('.skill-card');
+      skillCards.forEach((card, index) => {
+        card.style.transitionDelay = `${index * 0.1}s`;
+      });
+      
+      // Add animation delay to project cards
+      const projectCards = document.querySelectorAll('.project-card');
+      projectCards.forEach((card, index) => {
+        card.style.transitionDelay = `${index * 0.15}s`;
+      });
+    </script>
+  </body>
+</html>
