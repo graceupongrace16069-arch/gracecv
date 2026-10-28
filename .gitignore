@@ -28,3 +28,6 @@ build/
 
 # Vercel
 .vercel
+
+# Reference material, not part of the site (copyrighted book)
+Eat_That_Frog.pdf
