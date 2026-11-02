@@ -960,6 +960,16 @@ html.menu-open {
   order: 2;
 }
 
+/* Side by side, the copy lines up with the demo's title bar and stays in view
+   while a tall demo scrolls past, instead of floating halfway down it. */
+@media screen and (min-width: 961px) {
+  .case-copy {
+    position: sticky;
+    top: calc(var(--header-h) + 32px);
+    align-self: start;
+  }
+}
+
 .case-label {
   display: flex;
   gap: 12px;
@@ -2470,7 +2480,9 @@ html {
   color: var(--text);
   font-family: var(--font-sans);
   font-size: 15vw;
-  font-size: 16.6cqi;
+  /* The tight tracking lets the last glyph's ink run ~0.065em past its
+     advance, so size by the ink (6.07em wide), not the text box. */
+  font-size: 16.4cqi;
   font-weight: 600;
   line-height: 0.95;
   letter-spacing: -0.065em;
