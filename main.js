@@ -33,26 +33,36 @@ if (themeToggle) {
   });
 }
 
-// Mobile menu (the nav collapses below 760px).
+// Mobile menu: a full-screen panel below 760px. While it's open the page
+// behind it is inert (no scrolling, no focus) and Escape closes it.
 const header = document.querySelector(".site-header");
 const menuButton = document.querySelector("[data-menu]");
+const narrowScreen = matchMedia("(max-width: 760px)");
 
 if (header && menuButton) {
+  const behindMenu = [...document.querySelectorAll("main, .site-footer, [data-to-top]")];
   const setOpen = (open) => {
     header.classList.toggle("is-open", open);
+    header.classList.remove("is-hidden");
     menuButton.setAttribute("aria-expanded", String(open));
+    root.classList.toggle("menu-open", open);
+    behindMenu.forEach((el) => (el.inert = open));
   };
   menuButton.hidden = false;
-  menuButton.addEventListener("click", () => setOpen(menuButton.getAttribute("aria-expanded") !== "true"));
-  header.querySelectorAll(".nav a").forEach((link) => link.addEventListener("click", () => setOpen(false)));
-  document.addEventListener("click", (event) => {
-    if (!header.contains(event.target)) setOpen(false);
+  menuButton.addEventListener("click", () => {
+    const open = menuButton.getAttribute("aria-expanded") !== "true";
+    setOpen(open);
+    if (open) header.querySelector(".nav a")?.focus();
   });
+  header.querySelectorAll(".nav a, .brand").forEach((link) => link.addEventListener("click", () => setOpen(false)));
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && header.classList.contains("is-open")) {
       setOpen(false);
       menuButton.focus();
     }
+  });
+  narrowScreen.addEventListener("change", (event) => {
+    if (!event.matches) setOpen(false);
   });
 }
 
@@ -123,11 +133,17 @@ if (copyButton && navigator.clipboard && window.isSecureContext) {
   });
 }
 
-// Content rises in once as it enters the viewport. Siblings that arrive
-// together are staggered slightly; nothing ever fades back out.
+// Scroll animations. Where the browser supports scroll-driven animations,
+// styles.css ties every effect to the scroll position, so it plays forward on
+// the way down and backward on the way up. Elsewhere, content rises in as it
+// enters and resets once it drops back below the fold, so it rises again on
+// the next pass down.
 const revealItems = document.querySelectorAll(".reveal");
+const scrollLinked = !reduceMotion.matches && window.CSS?.supports?.("animation-timeline: view()");
 
-if ("IntersectionObserver" in window && !reduceMotion.matches) {
+if (scrollLinked) {
+  // Nothing to do: styles.css runs the reveals.
+} else if ("IntersectionObserver" in window && !reduceMotion.matches) {
   // Set here, not in theme.js, so content is only ever hidden by the script that reveals it.
   root.classList.add("reveal-ready");
   const revealer = new IntersectionObserver(
@@ -136,7 +152,9 @@ if ("IntersectionObserver" in window && !reduceMotion.matches) {
       arriving.forEach((entry, i) => {
         entry.target.style.setProperty("--delay", `${Math.min(i, 4) * 80}ms`);
         entry.target.classList.add("is-in");
-        revealer.unobserve(entry.target);
+      });
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting && entry.boundingClientRect.top > 0) entry.target.classList.remove("is-in");
       });
     },
     { rootMargin: "0px 0px -8% 0px" }
@@ -146,12 +164,73 @@ if ("IntersectionObserver" in window && !reduceMotion.matches) {
   revealItems.forEach((item) => item.classList.add("is-in"));
 }
 
-// Back-to-top button, shown once the hero is out of view.
+// About statement: split into words so each one can light up in turn as it
+// scrolls past (styles.css drives the timing). Screen readers get the
+// sentence once, unsplit.
+const statement = document.querySelector("[data-statement]");
+
+if (statement && scrollLinked) {
+  const visual = document.createElement("span");
+  visual.setAttribute("aria-hidden", "true");
+  let count = 0;
+  statement.childNodes.forEach((node) => {
+    const key = node.nodeType === Node.ELEMENT_NODE;
+    node.textContent.split(/\s+/).filter(Boolean).forEach((text) => {
+      const word = document.createElement("span");
+      word.className = key ? "w is-key" : "w";
+      word.textContent = text;
+      word.style.setProperty("--i", count++);
+      visual.append(word, " ");
+    });
+  });
+  const spoken = document.createElement("span");
+  spoken.className = "sr-only";
+  spoken.textContent = statement.textContent.replace(/\s+/g, " ").trim();
+  statement.style.setProperty("--n", count);
+  statement.replaceChildren(spoken, visual);
+}
+
+// Scroll rhythm: the header slides away while reading down and comes back on
+// the way up. Once past the hero, the back-to-top button appears on the way
+// up (or at the very end), so neither covers content.
 const toTop = document.querySelector("[data-to-top]");
 const hero = document.querySelector(".hero");
+let heroInView = true;
+let lastY = window.scrollY;
+let scrollQueued = false;
+
+function onScroll() {
+  scrollQueued = false;
+  const y = Math.max(0, window.scrollY);
+  const delta = y - lastY;
+  if (Math.abs(delta) < 6) return;
+  lastY = y;
+  const goingDown = delta > 0;
+  const atEnd = window.innerHeight + y >= document.documentElement.scrollHeight - 160;
+  header?.classList.toggle(
+    "is-hidden",
+    goingDown && y > 120 && !header.classList.contains("is-open") && !header.contains(document.activeElement)
+  );
+  toTop?.classList.toggle("is-visible", !heroInView && (!goingDown || atEnd));
+}
+
+window.addEventListener(
+  "scroll",
+  () => {
+    if (!scrollQueued) {
+      scrollQueued = true;
+      requestAnimationFrame(onScroll);
+    }
+  },
+  { passive: true }
+);
+header?.addEventListener("focusin", () => header.classList.remove("is-hidden"));
 
 if (toTop && hero && "IntersectionObserver" in window) {
-  new IntersectionObserver(([entry]) => toTop.classList.toggle("is-visible", !entry.isIntersecting)).observe(hero);
+  new IntersectionObserver(([entry]) => {
+    heroInView = entry.isIntersecting;
+    if (heroInView) toTop.classList.remove("is-visible");
+  }).observe(hero);
   toTop.addEventListener("click", (event) => {
     event.preventDefault();
     window.scrollTo({ top: 0, behavior: reduceMotion.matches ? "auto" : "smooth" });

@@ -278,6 +278,17 @@ button {
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), background-color 0.2s ease;
+}
+
+/* The header slides away while reading down the page and returns on the way up.
+   The reading-progress line stays in view along the top edge. */
+.site-header.is-hidden {
+  transform: translateY(-100%);
+}
+
+.site-header.is-hidden .scroll-progress {
+  bottom: -3px;
 }
 
 .header-inner {
@@ -416,18 +427,35 @@ button {
   }
 }
 
+/* Numbers and contact shortcuts only appear in the full-screen mobile menu */
+.nav-num,
+.nav-extra {
+  display: none;
+}
+
 @media (max-width: 760px) {
+  .js .site-header.is-open {
+    background: var(--bg);
+  }
+
   .js .nav {
     position: absolute;
-    inset: var(--header-h) 0 auto;
+    top: 100%;
+    left: 0;
+    right: 0;
     display: none;
-    padding: 8px var(--gutter) 20px;
-    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 40px;
+    height: calc(100dvh - var(--header-h));
+    padding: 8px var(--gutter) max(28px, env(safe-area-inset-bottom));
+    overflow-y: auto;
+    overscroll-behavior: contain;
     background: var(--bg);
   }
 
   .js .site-header.is-open .nav {
-    display: block;
+    display: flex;
   }
 
   .js .nav ul {
@@ -435,25 +463,96 @@ button {
     gap: 0;
   }
 
-  .js .nav li + li {
-    border-top: 1px solid var(--border);
+  .js .nav li {
+    border-bottom: 1px solid var(--border);
   }
 
-  .js .nav a {
+  .js .nav li > a {
     display: flex;
-    min-height: 52px;
+    align-items: baseline;
+    gap: 16px;
+    min-height: 68px;
+    padding: 14px 0;
+    color: var(--text);
+    font-size: clamp(1.75rem, 8vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1.2;
+  }
+
+  .js .nav li > a[aria-current="true"] {
+    text-decoration: none;
+  }
+
+  .js .nav-num {
+    display: inline;
+    min-width: 22px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .js .nav li > a[aria-current="true"] .nav-num {
+    color: var(--accent);
+  }
+
+  .js .nav-extra {
+    display: grid;
+    justify-items: start;
+    gap: 10px;
+  }
+
+  .nav-extra-label {
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+
+  .nav-extra a {
+    min-height: 40px;
     padding: 0;
     color: var(--text);
-    font-size: 1.125rem;
+    font-size: 1rem;
+    text-decoration: underline;
+    text-decoration-color: var(--border-strong);
+    text-underline-offset: 4px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .js .site-header.is-open .nav li,
+    .js .site-header.is-open .nav-extra {
+      animation: menu-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+
+    .js .site-header.is-open .nav li:nth-child(2) { animation-delay: 0.04s; }
+    .js .site-header.is-open .nav li:nth-child(3) { animation-delay: 0.08s; }
+    .js .site-header.is-open .nav li:nth-child(4) { animation-delay: 0.12s; }
+    .js .site-header.is-open .nav li:nth-child(5) { animation-delay: 0.16s; }
+    .js .site-header.is-open .nav-extra { animation-delay: 0.22s; }
   }
 }
 
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+/* While the menu is open the page behind it doesn't scroll */
+html.menu-open {
+  overflow: hidden;
+}
+
+/* Without JavaScript the links stay inline, so make room for them */
 @media (max-width: 560px) {
-  .brand-name {
+  html:not(.js) .brand-name {
     display: none;
   }
 
-  .nav a {
+  html:not(.js) .nav a {
     padding: 0 8px;
     font-size: 0.875rem;
   }
@@ -594,6 +693,30 @@ button {
   letter-spacing: -0.055em;
 }
 
+.hello {
+  display: block;
+  margin-bottom: 0.3em;
+  color: var(--muted);
+  font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* Each word of the name sits in a mask it rises out of on load. The padding
+   keeps descenders unclipped; the negative margin keeps the line height as is. */
+.mask {
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.12em 0.02em 0.16em;
+  margin: -0.12em -0.02em -0.16em;
+  vertical-align: top;
+}
+
+.mask > span {
+  display: inline-block;
+}
+
 .role {
   margin-top: 20px;
   color: var(--muted);
@@ -621,13 +744,14 @@ button {
   width: 100%;
   max-width: 400px;
   margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius);
 }
 
 .hero-photo img {
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
-  border-radius: var(--radius);
 }
 
 /* At-a-glance facts, set like a spec sheet */
@@ -669,29 +793,75 @@ button {
   text-decoration-color: currentColor;
 }
 
+/* Tablet and phone: a compact profile row (portrait + availability), then the name */
 @media (max-width: 860px) {
+  .hero {
+    padding-top: clamp(28px, 6vw, 48px);
+  }
+
   .hero-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 0 14px;
+  }
+
+  .hero-copy {
+    display: contents;
   }
 
   .hero-photo {
-    order: -1;
+    grid-row: 1;
+    grid-column: 1;
     justify-self: start;
-    max-width: 112px;
+    width: 72px;
   }
 
-  .hero-photo img {
-    border-radius: 12px;
+  .hero-photo {
+    border-radius: 14px;
+  }
+
+  .availability {
+    grid-row: 1;
+    grid-column: 2;
+    line-height: 1.5;
+  }
+
+  .hero h1,
+  .role,
+  .lead,
+  .print-contact,
+  .actions {
+    grid-column: 1 / -1;
   }
 
   .hero h1 {
-    margin-top: 20px;
+    margin-top: 28px;
+    /* Sized so the full name stays on one line down to 320px screens */
+    font-size: clamp(2.5rem, 12.5vw, 5.5rem);
+  }
+
+  .role {
+    margin-top: 14px;
+  }
+
+  .lead {
+    margin-top: 18px;
+  }
+
+  .actions {
+    margin-top: 28px;
   }
 }
 
 @media (max-width: 560px) {
+  .actions .btn {
+    flex: 1 1 140px;
+    padding: 0 14px;
+  }
+
   .spec {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 40px;
   }
 
   .spec > div:nth-child(n + 3) {
@@ -699,16 +869,11 @@ button {
   }
 }
 
-@media (max-width: 420px) {
-  .actions .btn {
-    flex: 1 1 100%;
-  }
-}
-
 /* ---------- Sections ---------- */
 
 .section {
-  padding-block: clamp(72px, 10vw, 128px);
+  position: relative;
+  padding-block: clamp(64px, 10vw, 128px);
   border-top: 1px solid var(--border);
 }
 
@@ -734,6 +899,15 @@ button {
 
 .section-index span {
   color: var(--text);
+}
+
+/* About uses the index line itself as its heading */
+.section-head h2.section-index {
+  max-width: none;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0;
 }
 
 .section-head h2 {
@@ -768,7 +942,7 @@ button {
 
 .cases {
   display: grid;
-  gap: clamp(72px, 10vw, 128px);
+  gap: clamp(64px, 10vw, 128px);
 }
 
 .case {
@@ -1246,6 +1420,8 @@ button {
 }
 
 .table-wrap {
+  /* Positioned so screen-reader-only text in cells stays inside the scroll box */
+  position: relative;
   max-height: 300px;
   margin-top: 12px;
   overflow: auto;
@@ -1858,6 +2034,32 @@ button {
 
 /* ---------- About ---------- */
 
+.statement {
+  max-width: 24ch;
+  font-size: clamp(1.75rem, 4.2vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+.statement strong,
+.statement .is-key {
+  color: var(--accent);
+  font-weight: inherit;
+}
+
+/* --p runs 0 → 1 as the statement scrolls through the view; each word
+   (--i of --n) brightens in turn, and dims again on the way back up. */
+@property --p {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+
+.statement .w {
+  opacity: clamp(0.14, calc((var(--p) * (var(--n) + 4) - var(--i)) / 4), 1);
+}
+
 .about-grid {
   display: grid;
   grid-template-columns: var(--cols);
@@ -1920,6 +2122,108 @@ button {
   }
 }
 
+/* Experience timeline (template in index.html) */
+.timeline {
+  position: relative;
+  display: grid;
+  gap: 36px;
+  max-width: 720px;
+  margin: clamp(56px, 8vw, 96px) 0 0 auto;
+  padding-left: 28px;
+  list-style: none;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  inset: 6px auto 6px 0;
+  width: 1px;
+  background: var(--text);
+  transform-origin: 50% 0;
+}
+
+.timeline li {
+  position: relative;
+}
+
+.timeline li::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: -32px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--bg);
+  box-shadow: inset 0 0 0 2px var(--text);
+}
+
+.timeline-date {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.timeline h3 {
+  margin-top: 6px;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.timeline li > p:last-child {
+  margin-top: 6px;
+  color: var(--muted);
+}
+
+/* ---------- Marquee band ---------- */
+
+.marquee {
+  display: grid;
+  gap: 0.1em;
+  padding-block: clamp(36px, 6vw, 72px);
+  overflow: hidden;
+  font-size: clamp(2.5rem, 8.5vw, 7rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.marquee-row {
+  display: flex;
+  width: max-content;
+}
+
+.marquee-row span {
+  display: inline-flex;
+  align-items: center;
+}
+
+.marquee-row span::after {
+  content: "";
+  flex: none;
+  width: 0.14em;
+  height: 0.14em;
+  margin-inline: 0.42em;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* The second row runs the other way, in outline */
+.marquee-row-alt {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--text);
+  transform: translateX(-12vw);
+}
+
+@media (forced-colors: active) {
+  .marquee-row-alt {
+    color: CanvasText;
+    -webkit-text-stroke: 0;
+  }
+}
+
 /* ---------- Skills ---------- */
 
 .skill-list {
@@ -1967,6 +2271,13 @@ button {
 }
 
 /* ---------- Contact ---------- */
+
+.contact-head h2 {
+  max-width: 11ch;
+  font-size: clamp(3rem, 10vw, 8.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.06em;
+}
 
 .contact-grid {
   display: grid;
@@ -2061,21 +2372,120 @@ button {
   }
 }
 
+/* ---------- Phones & touch ---------- */
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Demos run edge to edge on phones so charts get every pixel */
+@media (max-width: 560px) {
+  .demo,
+  .pd-panel {
+    margin-inline: calc(-1 * var(--gutter));
+    border-inline: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .demo-bar,
+  .demo-body {
+    padding-inline: var(--gutter);
+  }
+
+  .pd-panel {
+    padding: 22px var(--gutter);
+  }
+
+  .code {
+    font-size: 11.5px;
+  }
+}
+
+/* Finger-sized targets; 16px form text stops iOS zooming in on focus */
+@media (pointer: coarse) {
+  .icon-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .btn-sm {
+    min-height: 44px;
+  }
+
+  .seg button {
+    min-height: 40px;
+    padding: 0 13px;
+  }
+
+  .select {
+    min-height: 44px;
+    font-size: 16px;
+  }
+
+  .frog-letter {
+    min-height: 40px;
+    font-size: 16px;
+  }
+
+  .frog-row input[type="range"] {
+    height: 32px;
+  }
+
+  .text-btn {
+    min-height: 40px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .btn:active,
+    .icon-btn:active,
+    .seg button:active,
+    .pipe-stage:active,
+    .pd-step:active,
+    .channel:active {
+      transform: scale(0.98);
+    }
+  }
+}
+
 /* ---------- Footer & back to top ---------- */
 
 .site-footer {
-  padding-block: 28px 32px;
+  padding-block: clamp(32px, 5vw, 56px) 32px;
   border-top: 1px solid var(--border);
   color: var(--muted);
   font-family: var(--font-mono);
   font-size: 0.75rem;
 }
 
+.site-footer .container {
+  container-type: inline-size;
+}
+
+/* The name set edge to edge across the container */
+.footer-word {
+  overflow: hidden;
+  margin-bottom: clamp(20px, 3vw, 32px);
+  padding-bottom: 0.04em;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 15vw;
+  font-size: 16.6cqi;
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.065em;
+  white-space: nowrap;
+}
+
+.footer-word span {
+  display: block;
+}
+
 .footer-inner {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 12px;
+  gap: 8px 24px;
 }
 
 .to-top {
@@ -2140,12 +2550,225 @@ button {
 
 /* ---------- Motion ---------- */
 
-/* Content rises in once as it scrolls into view (main.js adds .is-in).
+/* On load: the greeting and the name rise out of their masks, then the rest
+   of the hero follows and the portrait opens like a curtain. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-copy > :not(h1),
+  .hello {
+    animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  .mask > span {
+    animation: unmask 1s cubic-bezier(0.2, 0.75, 0.15, 1) both;
+  }
+
+  .hero-photo {
+    animation: curtain 1.1s cubic-bezier(0.65, 0, 0.2, 1) 0.2s both;
+  }
+
+  .mask:first-child > span { animation-delay: 0.08s; }
+  .mask:last-child > span { animation-delay: 0.16s; }
+  .role { animation-delay: 0.26s; }
+  .lead { animation-delay: 0.32s; }
+  .actions { animation-delay: 0.38s; }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@keyframes unmask {
+  from {
+    transform: translateY(110%);
+  }
+}
+
+@keyframes curtain {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+
+  to {
+    clip-path: inset(0);
+  }
+}
+
+/* On scroll. Each effect is tied to the scroll position rather than played
+   once, so it runs forward on the way down and backward on the way up:
+   - the hero drifts and fades as it leaves, and the portrait slowly zooms
+   - every section's top rule draws itself across the page
+   - content rises in as it enters (and sinks back out when you scroll up)
+   - demos zoom up into place
+   - the About statement lights up word by word
+   - the marquee rows slide in opposite directions
+   - the name in the footer rises into view at the very end
+   Browsers without scroll-driven animations get the class-based fallback
+   further down instead (main.js decides which one runs). */
+@supports (animation-timeline: view()) {
+  @media screen and (prefers-reduced-motion: no-preference) {
+    .hero {
+      view-timeline: --hero block;
+    }
+
+    .hero > .container {
+      animation: hero-out ease-in both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 100%;
+    }
+
+    .hero-photo img {
+      animation: slow-zoom linear both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 100%;
+    }
+
+    .section {
+      border-top-color: transparent;
+    }
+
+    .section::before {
+      content: "";
+      position: absolute;
+      inset: -1px 0 auto;
+      height: 1px;
+      background: var(--border);
+      transform-origin: 0 50%;
+      animation: draw-x cubic-bezier(0.3, 0.6, 0.2, 1) both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 45%;
+    }
+
+    .reveal {
+      animation: rise-in cubic-bezier(0.2, 0.6, 0.3, 1) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 260px;
+    }
+
+    .demo.reveal,
+    .pd.reveal {
+      animation-name: zoom-in;
+      animation-range: entry 0% entry 380px;
+    }
+
+    .statement {
+      animation: light-up linear both;
+      animation-timeline: view();
+      animation-range: cover 12% cover 50%;
+    }
+
+    .marquee-row {
+      animation: drift-left linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+
+    .marquee-row-alt {
+      animation-name: drift-right;
+    }
+
+    .timeline::before {
+      animation: draw-y linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 60%;
+    }
+
+    .footer-word {
+      view-timeline: --word block;
+    }
+
+    .footer-word span {
+      animation: word-up cubic-bezier(0.2, 0.6, 0.3, 1) both;
+      animation-timeline: --word;
+      animation-range: entry 0% entry 100%;
+    }
+  }
+}
+
+@keyframes hero-out {
+  to {
+    opacity: 0;
+    transform: translateY(10vh) scale(0.98);
+  }
+}
+
+@keyframes slow-zoom {
+  to {
+    transform: scale(1.12);
+  }
+}
+
+@keyframes draw-x {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes draw-y {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(56px);
+  }
+}
+
+@keyframes zoom-in {
+  from {
+    opacity: 0;
+    transform: translateY(72px) scale(0.94);
+  }
+}
+
+@keyframes light-up {
+  from {
+    --p: 0;
+  }
+
+  to {
+    --p: 1;
+  }
+}
+
+@keyframes drift-left {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-45vw);
+  }
+}
+
+@keyframes drift-right {
+  from {
+    transform: translateX(-55vw);
+  }
+
+  to {
+    transform: translateX(-10vw);
+  }
+}
+
+@keyframes word-up {
+  from {
+    transform: translateY(102%);
+  }
+}
+
+/* Fallback: content rises in as it enters (main.js adds .is-in) and resets
+   once it drops back below the fold, so it rises again on the next pass.
    Without JavaScript, or with reduced motion, it is simply there. */
 @media (prefers-reduced-motion: no-preference) {
   .reveal-ready .reveal {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(24px);
     transition:
       opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--delay, 0s),
       transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--delay, 0s);
@@ -2154,24 +2777,6 @@ button {
   .reveal-ready .reveal.is-in {
     opacity: 1;
     transform: none;
-  }
-
-  .hero-copy > *,
-  .hero-photo {
-    animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-  }
-
-  .hero h1 { animation-delay: 0.06s; }
-  .role { animation-delay: 0.12s; }
-  .lead { animation-delay: 0.18s; }
-  .actions { animation-delay: 0.24s; }
-  .hero-photo { animation-delay: 0.15s; }
-}
-
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
   }
 }
 
@@ -2258,12 +2863,16 @@ button {
   .actions,
   .availability,
   .hero-photo,
+  .hello,
   .spec,
+  .statement,
+  .marquee,
   .demo,
   #process,
   #contact,
+  .footer-word,
   .to-top,
-  .section-head h2,
+  .section-head h2:not(.section-index),
   .section-intro,
   .case-credit {
     display: none !important;
@@ -2278,8 +2887,9 @@ button {
     transform: none !important;
   }
 
-  .hero-copy > *,
-  .fade-in {
+  *,
+  *::before,
+  *::after {
     animation: none !important;
   }
 

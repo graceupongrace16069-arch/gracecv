@@ -71,12 +71,19 @@
 
         <nav class="nav" id="site-nav" aria-label="Main">
           <ul>
-            <li><a href="#work">Work</a></li>
-            <li><a href="#process">Process</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#about"><span class="nav-num" aria-hidden="true">01</span>About</a></li>
+            <li><a href="#work"><span class="nav-num" aria-hidden="true">02</span>Work</a></li>
+            <li><a href="#process"><span class="nav-num" aria-hidden="true">03</span>Process</a></li>
+            <li><a href="#skills"><span class="nav-num" aria-hidden="true">04</span>Skills</a></li>
+            <li><a href="#contact"><span class="nav-num" aria-hidden="true">05</span>Contact</a></li>
           </ul>
+          <!-- Shown only in the full-screen mobile menu -->
+          <div class="nav-extra">
+            <p class="nav-extra-label">Get in touch</p>
+            <a href="mailto:gracenganga0742@gmail.com">gracenganga0742@gmail.com</a>
+            <a href="https://wa.me/254769589467" target="_blank" rel="noopener">WhatsApp<span class="sr-only"> (opens in a new tab)</span></a>
+            <a href="https://www.linkedin.com/in/grace-nganga-359063379" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>
+          </div>
         </nav>
 
         <div class="header-actions">
@@ -101,7 +108,10 @@
         <div class="container hero-grid">
           <div class="hero-copy">
             <p class="availability"><span class="dot" aria-hidden="true"></span>Open to new roles &amp; collaborations</p>
-            <h1 id="hero-title">Grace Nganga</h1>
+            <h1 id="hero-title">
+              <span class="hello">Hi, I'm</span>
+              <span class="name"><span class="mask"><span>Grace</span></span> <span class="mask"><span>Nganga</span></span></span>
+            </h1>
             <p class="role">Data Analyst &amp; Insights Specialist</p>
             <p class="lead">
               I turn messy data into clear, actionable insights: cleaning and analyzing it with SQL and Python,
@@ -124,7 +134,16 @@
           </div>
 
           <figure class="hero-photo">
-            <img src="images/about/1.jpg" width="780" height="780" alt="Portrait of Grace Nganga" fetchpriority="high" decoding="async" />
+            <img
+              src="images/about/1.jpg"
+              srcset="images/about/1-400.jpg 400w, images/about/1.jpg 780w"
+              sizes="(max-width: 860px) 72px, 400px"
+              width="780"
+              height="780"
+              alt="Portrait of Grace Nganga"
+              fetchpriority="high"
+              decoding="async"
+            />
           </figure>
         </div>
 
@@ -150,6 +169,87 @@
         </div>
       </section>
 
+      <!-- ABOUT
+           The statement lights up word by word as it scrolls past (main.js splits it into words).
+           Text in <strong> is set in the accent color. -->
+      <section class="section" id="about" aria-labelledby="about-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <h2 class="section-index" id="about-title"><span>01</span>About me</h2>
+            <div>
+              <p class="statement" data-statement>
+                I'm a data analyst in Kenya. I take the messy part of the job (duplicate rows, blank cells, one region
+                spelled three ways) and turn it into <strong>numbers people can trust, and act on.</strong>
+              </p>
+            </div>
+          </div>
+
+          <div class="about-grid">
+            <div class="prose reveal">
+              <p>
+                I work end to end: collecting and cleaning data with <strong>SQL</strong> and <strong>Python</strong>,
+                agreeing on the metrics with the people who will use them, then building <strong>Power BI</strong>
+                and <strong>Excel</strong> dashboards that tell the story plainly.
+              </p>
+              <p>
+                The part I enjoy most is the partnership: working with stakeholders to define the right metrics, then
+                validating every result so the recommendation is one they can trust and actually use.
+              </p>
+              <p>
+                Right now I'm exploring how AI can elevate analytics: using LLMs to speed up data exploration,
+                automate documentation, and prototype predictive workflows that plug into my SQL/Python stack.
+              </p>
+              <p>Away from the data, you'll find me working through logic puzzles or out cycling.</p>
+            </div>
+
+            <dl class="facts reveal">
+              <div>
+                <dt>Based in</dt>
+                <dd>Kenya (East Africa Time)</dd>
+              </div>
+              <div>
+                <dt>Currently exploring</dt>
+                <dd>AI-assisted analytics with LLMs</dd>
+              </div>
+              <div>
+                <dt>Away from the data</dt>
+                <dd>Logic puzzles &amp; cycling</dd>
+              </div>
+              <div>
+                <dt>What I care about</dt>
+                <dd>Numbers people can trust, and act on</dd>
+              </div>
+              <div>
+                <dt>Open to</dt>
+                <dd>New roles &amp; collaborations</dd>
+              </div>
+            </dl>
+          </div>
+
+          <!-- EXPERIENCE (optional). Uncomment and fill in to add a timeline; its line draws in as you scroll:
+          <ol class="timeline">
+            <li class="reveal">
+              <p class="timeline-date">2024 — Present</p>
+              <h3>Data Analyst · Company name</h3>
+              <p>One line on what you owned, with a number: "Built the weekly sales dashboard used by 40 managers."</p>
+            </li>
+          </ol>
+          -->
+        </div>
+      </section>
+
+      <!-- Decorative band: slides left as you scroll down and back as you scroll up -->
+      <div class="marquee" aria-hidden="true">
+        <p class="marquee-row">
+          <span>SQL</span><span>Python</span><span>Power BI</span><span>Excel</span><span>QuickBooks</span><span>Forecasting</span><span>Dashboards</span>
+          <span>SQL</span><span>Python</span><span>Power BI</span><span>Excel</span><span>QuickBooks</span><span>Forecasting</span><span>Dashboards</span>
+        </p>
+        <p class="marquee-row marquee-row-alt">
+          <span>Clean data</span><span>Clear metrics</span><span>Tested forecasts</span><span>Practical recommendations</span>
+          <span>Clean data</span><span>Clear metrics</span><span>Tested forecasts</span><span>Practical recommendations</span>
+        </p>
+      </div>
+
       <!-- WORK
            Each case study is one <article class="case">. To finish one with real material:
              1. Add the measurable result: uncomment the "Result" row in its <dl class="case-meta">.
@@ -159,9 +259,9 @@
       <section class="section" id="work" aria-labelledby="work-title">
         <div class="container">
           <div class="section-head reveal">
-            <p class="section-index"><span>01</span>Work</p>
+            <p class="section-index"><span>02</span>Work</p>
             <div>
-              <h2 id="work-title">Case studies you can click through</h2>
+              <h2 id="work-title">Selected work you can click through</h2>
               <p class="section-intro">
                 Four projects, each with a live demo built on sample data, so you can try the kind of deliverable I
                 build: filter it, forecast with it, follow the data through the pipeline, prioritize with it.
@@ -425,7 +525,7 @@ RETURN
       <section class="section" id="process" aria-labelledby="process-title">
         <div class="container">
           <div class="section-head reveal">
-            <p class="section-index"><span>02</span>Process</p>
+            <p class="section-index"><span>03</span>Process</p>
             <div>
               <h2 id="process-title">From messy rows to a decision, in four steps</h2>
               <p class="section-intro">Step through a tiny sample dataset the same way I work through real ones. Every number below is computed live from these nine rows.</p>
@@ -459,62 +559,6 @@ RETURN
               <p class="demo-fallback">Turn on JavaScript to step through the sample data.</p>
             </div>
           </div>
-        </div>
-      </section>
-
-      <!-- ABOUT -->
-      <section class="section" id="about" aria-labelledby="about-title">
-        <div class="container">
-          <div class="section-head reveal">
-            <p class="section-index"><span>03</span>About</p>
-            <div>
-              <h2 id="about-title">Clear numbers, practical recommendations.</h2>
-            </div>
-          </div>
-
-          <div class="about-grid">
-            <div class="prose reveal">
-              <p>
-                I'm a data analyst who turns messy data into clear, actionable insights. I work end to end, from
-                collecting and cleaning data with <strong>SQL</strong> and <strong>Python</strong> to building
-                intuitive dashboards in <strong>Power BI</strong> and <strong>Excel</strong> that tell a story and
-                drive decisions.
-              </p>
-              <p>
-                I enjoy partnering with stakeholders, defining the right metrics, and validating results so
-                recommendations are trustworthy and practical.
-              </p>
-              <p>
-                I'm currently exploring how AI can elevate analytics: using LLMs to speed up data exploration,
-                automate documentation, and prototype predictive workflows that plug into my SQL/Python stack.
-              </p>
-            </div>
-
-            <dl class="facts reveal">
-              <div>
-                <dt>Currently exploring</dt>
-                <dd>AI-assisted analytics with LLMs</dd>
-              </div>
-              <div>
-                <dt>Away from the data</dt>
-                <dd>Logic puzzles &amp; cycling</dd>
-              </div>
-              <div>
-                <dt>What I care about</dt>
-                <dd>Numbers people can trust, and act on</dd>
-              </div>
-            </dl>
-          </div>
-
-          <!-- EXPERIENCE (optional). Uncomment and fill in to add a timeline:
-          <ol class="timeline">
-            <li>
-              <p class="timeline-date">2024 — Present</p>
-              <h3>Data Analyst · Company name</h3>
-              <p>One line on what you owned, with a number: "Built the weekly sales dashboard used by 40 managers."</p>
-            </li>
-          </ol>
-          -->
         </div>
       </section>
 
@@ -589,10 +633,10 @@ RETURN
       <!-- CONTACT -->
       <section class="section" id="contact" aria-labelledby="contact-title">
         <div class="container">
-          <div class="section-head reveal">
+          <div class="section-head contact-head reveal">
             <p class="section-index"><span>05</span>Contact</p>
             <div>
-              <h2 id="contact-title">Let's build something insightful.</h2>
+              <h2 id="contact-title">Let's work together.</h2>
             </div>
           </div>
 
@@ -649,9 +693,14 @@ RETURN
     </main>
 
     <footer class="site-footer">
-      <div class="container footer-inner">
-        <p>&copy; <span data-year>2026</span> Grace Nganga</p>
-        <p>Last updated <time datetime="2026-10">October 2026</time></p>
+      <div class="container">
+        <!-- Rises into place as you reach the end of the page -->
+        <p class="footer-word" aria-hidden="true"><span>Grace Nganga</span></p>
+        <div class="footer-inner">
+          <p>&copy; <span data-year>2026</span> Grace Nganga</p>
+          <p>Data analyst · Kenya</p>
+          <p>Last updated <time datetime="2026-10">October 2026</time></p>
+        </div>
       </div>
     </footer>
 

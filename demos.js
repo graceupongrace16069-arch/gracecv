@@ -286,7 +286,15 @@ function chart(host, { height, label, render }) {
   };
   svg.addEventListener("pointermove", pointer);
   svg.addEventListener("pointerdown", pointer);
-  svg.addEventListener("pointerleave", () => show(null));
+  // A mouse leaving hides the tooltip; after a tap it stays until the next tap elsewhere.
+  svg.addEventListener("pointerleave", (event) => {
+    if (event.pointerType === "mouse") show(null);
+  });
+  const tapAway = (event) => {
+    if (!wrap.isConnected) return document.removeEventListener("pointerdown", tapAway);
+    if (!wrap.contains(event.target)) show(null);
+  };
+  document.addEventListener("pointerdown", tapAway);
   svg.addEventListener("focus", () => show(api.active ?? api.view?.defaultIndex ?? 0, true));
   svg.addEventListener("blur", () => show(null));
   svg.addEventListener("keydown", (event) => {
@@ -577,8 +585,11 @@ function forecastDemo(root) {
       // Where the forecast begins
       const splitX = Math.round(x(start - 0.5)) + 0.5;
       s("line", { class: "g-axis", x1: splitX, x2: splitX, y1: m.top - 6, y2: height - m.bottom }, svg);
-      s("text", { class: "g-note", x: splitX + 6, y: m.top - 10, text: backtesting ? "Holdout 2025" : "Forecast" }, svg);
-      if (backtesting) s("text", { class: "g-note", x: splitX - 6, y: m.top - 10, "text-anchor": "end", text: "Training" }, svg);
+      // Label the right side of the split; on narrow charts it moves left of the line.
+      const rightLabel = backtesting ? "Holdout 2025" : "Forecast";
+      const roomRight = width - splitX - 6 > rightLabel.length * 6.4;
+      s("text", { class: "g-note", x: roomRight ? splitX + 6 : splitX - 6, y: m.top - 10, "text-anchor": roomRight ? "start" : "end", text: rightLabel }, svg);
+      if (backtesting && roomRight) s("text", { class: "g-note", x: splitX - 6, y: m.top - 10, "text-anchor": "end", text: "Training" }, svg);
 
       const fcPoints = fc.map((f, k) => [x(start + k), y(f.mean)]);
       const band = [...fc.map((f, k) => [x(start + k), y(f.hi)]), ...fc.map((f, k) => [x(start + k), y(f.lo)]).reverse()];
@@ -1026,7 +1037,13 @@ function processDemo(root) {
     panel.replaceChildren(content);
 
     if (focusTab) tabs[index].focus();
-    if (focusPanel) panel.focus({ preventScroll: true });
+    if (focusPanel) {
+      panel.focus({ preventScroll: true });
+      // On phones "Next" sits far below the panel's top: bring the new step into view.
+      if (panel.getBoundingClientRect().top < 0) {
+        panel.scrollIntoView({ block: "start", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      }
+    }
   }
 
   tabs.forEach((tab, i) => tab.addEventListener("click", () => select(i)));
