@@ -19,11 +19,17 @@ Personal portfolio for Grace Nganga, a data analyst working with SQL, Python, Po
   validate & recommend. Every number is computed live from those rows.
 - **CV on demand.** "Save CV as PDF" prints the page through a dedicated print stylesheet as a clean two-page CV.
 - **Recruiter-friendly first screen:** location, live local time, email, toolkit.
-- **Smooth scrolling:** sections rise in once as they come into view (never left half-faded), a reading-progress
-  line under the header, and a back-to-top button once you're past the hero.
-- **Built for phones:** full-screen menu with contact shortcuts, a header that hides while reading and returns on
-  scroll-up, a compact profile hero, edge-to-edge demos, 40–44px tap targets, 16px form text (no iOS zoom),
-  tap-to-read chart tooltips, a 36 KB portrait on small screens, and no sideways scrolling down to 320px.
+- **Scroll motion (the same engine as the Olive International Schools site):** blocks rise in as they arrive and
+  leave again when scrolled past, coming back from whichever direction you scroll; headings rise word by word; the
+  hero lifts away in layers, heading blocks drift, the word band travels sideways and section rules draw themselves
+  across the page. Every value glides with a little inertia, so it plays smoothly forwards and backwards with a
+  wheel, a trackpad or a finger, in every browser. Distances are smaller on phones, and it all switches off with
+  reduced motion.
+- **Built for phones:** a bottom bar with Call, WhatsApp and Email always in thumb reach, a full-screen menu, a
+  header that hides while reading and returns on scroll-up, a compact profile hero, edge-to-edge demos, labels
+  stacked above text, 44px tap targets throughout, 16px form text (no iOS zoom), code blocks that fade at the edge
+  when they scroll sideways, tap-to-read chart tooltips, a 36 KB portrait on small screens, and no sideways scrolling
+  down to 320px.
 - Light and dark themes (follows the system, with a toggle that remembers the choice).
 - Accessible: semantic landmarks, skip link, keyboard-operable tabs and charts (arrow keys), a data-table view for every
   chart, screen-reader announcements, WCAG AA contrast, colorblind-checked chart colors, reduced-motion support.
@@ -37,7 +43,7 @@ gracecv/
 ├── index.html            # The portfolio page
 ├── styles.css            # All styles (theme tokens at the top, print CV at the bottom)
 ├── theme.js              # Applies the saved theme before first paint
-├── main.js               # Theme toggle, mobile menu, nav highlight, scroll reveal, back to top, CV print, clock, copy-email
+├── main.js               # Theme toggle, mobile menu, nav highlight, scroll motion engine, back to top, CV print, clock, copy-email
 ├── demos.js              # Interactive demos: sample data, forecasting model, SVG charts
 ├── 404.html              # Not-found page
 ├── favicon.svg
